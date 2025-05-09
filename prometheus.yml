@@ -2,11 +2,9 @@ global:
   scrape_interval: 15s
 
 scrape_configs:
-  - job_name: node-exporter
+  - job_name: 'flask-api'
+    metrics_path: /metrics  # ensure your Flask app has this route
+    scheme: https
     static_configs:
-      - targets: [node_exporter:9100]
-
-  - job_name: flask-api
-    metrics_path: /metrics
-    static_configs:
-      - targets: [flask-api:8080]
+      - targets:
+          - 'bookstore-dna2hmc7egf4ewc9.canadacentral-01.azurewebsites.net'
